@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>com.brachkow.web-video</string>
+	<key>category</key>
+	<string>Universal Actions</string>
+	<key>connections</key>
+	<dict>
+		<key>2548D3EC-FB7C-4095-B5BE-C1974A09FE0A</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>473A3340-D7BF-43E7-8ED0-0428806E5E20</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>473A3340-D7BF-43E7-8ED0-0428806E5E20</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F361B940-9887-4FA5-8A54-E8C7B178AC6F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Timur Brachkow</string>
+	<key>description</key>
+	<string>Convert video to mp4 (1080p, 30fps)</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Optimize video for web</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>acceptsmulti</key>
+				<integer>1</integer>
+				<key>filetypes</key>
+				<array>
+					<string>com.apple.quicktime-movie</string>
+					<string>public.mpeg-4</string>
+				</array>
+				<key>name</key>
+				<string>Optimize video for Web</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.action</string>
+			<key>uid</key>
+			<string>2548D3EC-FB7C-4095-B5BE-C1974A09FE0A</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<true/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/opt/homebrew/bin
+
+query=$1
+
+for FILE in "$@"; do
+	ffmpeg -i "$FILE" -vf scale=-2:1080 -r 30 -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k "${FILE%%.*}.mp4"
+done</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>473A3340-D7BF-43E7-8ED0-0428806E5E20</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>Converted and ready to be sent!</string>
+				<key>title</key>
+				<string>Video converted</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>F361B940-9887-4FA5-8A54-E8C7B178AC6F</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string># Optimize video for web sharing
+
+Alfred Workflow for optimising video for web sharing.
+
+## How it works
+1. Grab a video file using Alfred's [universal action](https://www.alfredapp.com/universal-actions/)
+2. Workflow will convert it to 1080p, 30fps mp4 file
+3. Conversion takes time, so workflow will send you notification when video it is done and result ready to send.
+
+## Requirements &amp; Installation
+
+1. [Install `brew`](https://brew.sh/)
+2. Install `ffmpeg` — `brew install ffmpeg`
+3. Download workflow from the [releases page](https://github.com/brachkow/alfred-web-video/releases/tag/v1.0.0) and install it
+
+## Credits
+
+- [Sergey Chikin](https://sergeychikin.ru/365/) for icon</string>
+	<key>uidata</key>
+	<dict>
+		<key>2548D3EC-FB7C-4095-B5BE-C1974A09FE0A</key>
+		<dict>
+			<key>xpos</key>
+			<real>95</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>473A3340-D7BF-43E7-8ED0-0428806E5E20</key>
+		<dict>
+			<key>xpos</key>
+			<real>305</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+		<key>F361B940-9887-4FA5-8A54-E8C7B178AC6F</key>
+		<dict>
+			<key>xpos</key>
+			<real>510</real>
+			<key>ypos</key>
+			<real>160</real>
+		</dict>
+	</dict>
+	<key>userconfigurationconfig</key>
+	<array/>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
